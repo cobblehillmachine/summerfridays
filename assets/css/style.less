@@ -1,17 +1,21 @@
 // Font Variables
-.body-copy {	font: 400 normal 22px "baskerville-urw"; letter-spacing: 1px;}
+.body-copy {	font: 400 normal 22px "baskerville-urw";}
+// .body-copy {font-family: "chaparral-pro",sans-serif;font-style: normal;font-weight: 400; font-size: 22px;}
 .accent-copy {	font: 400 normal 12px "proxima-nova";}
 .small-copy {	font: 400 normal 10px "proxima-nova"; line-height: 14px;}
 .italic {	font: 400 italic 22px "baskerville-urw"; letter-spacing: 1px;}
+// .italic {font-family: "chaparral-pro",sans-serif;font-style: italic;font-weight: 400; font-size: 22px;}
 // temporary
-.heading {	font: 400 normal 48px "baskerville-urw"; letter-spacing: 1px; text-transform: lowercase;}
+.heading {	font-family: "tablet-gothic-semi-condensed",sans-serif;font-style: normal;font-weight: 400; }
+
+.new-font {font-family: "tablet-gothic-semi-condensed",sans-serif;font-style: normal;font-weight: 600;text-transform: uppercase;}
 
 // Color Variables
 @primary: #202222;
 @gray: #807e7e;
 @lightgray: #f1f0ef;
 @link: #919797;
-@hover: #202222;
+@hover: #F58851;
 
 
 // Width Variables
@@ -19,7 +23,7 @@
 	@media @tablet {	width: 90%;}
 }
 @mobile-cont: 95%;
-@header-height: 162px;
+@header-height: 142px;
 
 // Media Queries
 @break-point: ~"only screen and (max-width: 1150px)";
@@ -42,10 +46,10 @@
 .browser-appearance(@string) {-webkit-appearance: @string;-moz-appearance:@string;appearance:@string;}
 
 // Input & Link Styles
-a {	.transition(all 0.2s ease); text-decoration: underline; color: @link; cursor: pointer;
-	&:hover {	color: @hover; text-decoration: none;}
+a {	.transition(all 0.2s ease); border-bottom: 2px solid @primary; color: @primary; cursor: pointer; text-decoration: none;
+	&:hover {	color: @hover; border-color: transparent}
 }
-.link-fix {	color: inherit; text-decoration: none;
+.link-fix {	color: inherit; border-bottom: 0;
 	&:hover {	color: @hover;}
 }
 .button, button {	 padding: 15px 25px; color: white; display: inline-block; text-decoration: none; border: 0; .transition(all 0.2s ease); cursor: pointer; .browser-appearance(none); border-radius: 0;
@@ -54,19 +58,23 @@ a {	.transition(all 0.2s ease); text-decoration: underline; color: @link; cursor
 label {	 display: block; margin-bottom: 5px;}
 input[type="text"], input[type="email"], input[type="password"],input[type="tel"], textarea {	.browser-appearance(none); border: 0; border-radius: 0; padding: 10px; .body-copy; resize: none; width: 100%; color: @primary}
 select {	.browser-appearance(none);  padding: 10px; border: 0; border-radius: 0; .body-copy; font-size: 15px; color: @primary; width: 100%;  background-repeat: no-repeat; background-position: 95% 50%; cursor: pointer;}
-@border: 1px solid #bbb9b9;
+@border: 1px solid @primary;
 
 // Heading Styles
-h1 {	.heading; margin: 0; padding: 0; border: 0;line-height: 48px;}
+h1 {	.heading; margin: 0; padding: 0; border: 0;line-height: 48px; text-transform: uppercase;}
 h2 {	.italic; margin: 0;}
-strong, b {	 .accent-copy; color: @gray; font-size: 24px; background-color: #CBEFE2;
+strong, b {	display: block; text-transform: uppercase; .new-font; font-size: 18px; margin-bottom: 10px;
 	@media @phone {	font-size: 20px;}
 }
 p {
 	@media @phone {	font-size: 18px;}
 }
 
-body {	width: 100%; height: 100%;overflow-x: hidden;  .body-copy; min-height: 1050px;;}
+body {	width: 100%; height: 100%;overflow-x: hidden;  .body-copy; min-height: 1050px;color: @primary; background-color: white;
+	&.gray {	background-color: @lightgray;
+		header {	background-color: white;}
+	}
+}
 body * {  box-sizing: border-box;}
 img {	max-width: 100%; height: auto;}
 .main-container {	position: relative; margin: 0 0 20px 0; }
@@ -74,12 +82,15 @@ table {	border-collapse: collapse;}
 *:focus { border: 0;  outline:none;}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0; }
 ul {	margin: 0;}
-.table {	display: table; vertical-align: middle;}
+.table {	display: table; vertical-align: middle; table-layout: fixed;}
 .table-cell {	display: table-cell; vertical-align: middle;}
 .row {	display: table-row;}
+.left {	text-align: left;}
+.right {	text-align: right;}
+.center {	text-align: center;}
 
 .quote { padding-left: 2.5%; border-left: @border; margin: 50px 0;
-	span {	.italic; font-size: 48px; background-color: #f2eb46; display: inline;
+	span {	.italic; font-size: 48px; background-color: #FFE05D; display: inline;
 		@media @phone {	font-size: 30px;}
 	}
 }
@@ -92,22 +103,38 @@ header { position: absolute; top: 0; width: 100%; z-index: 10; background: trans
 	.utility {	.small-copy; position: relative; .mid-cont; padding: 15px 0;color :white;
 		span:last-child {	position: absolute; right: 0;}
 	}
-	.container {	position: relative; text-align: center; padding: 10px 0; .mid-cont;
+	a {	.link-fix;}
+	.white {	display: block}
+	.colored {	display: none;}
+	&.open {
+		.white {	display: none}
+		.colored {	display: block;}
+	}
+	.container {	position: relative; text-align: center; padding: 30px 0; .mid-cont;
 		.sun, .hamburger {	 position: absolute; top: 50%; .transform(translate(0,-50%)); cursor: pointer;
 // 			@media @phone {	position: relative; top: auto; .transform(none);}
 		}
-		.logo {
-			@media @phone {	display: block; text-align: left;margin: 0;}
+		.logo {	display: block; margin: 0 auto;
+			@media @phone {	margin: 0;}
 		}
+		.logo-wrapper { text-align: center;
+			@media @phone {	 text-align: left;margin: 0;}
+		}
+
 		.sun {	 left: 0;}
 		.hamburger { right: 0;}
 
 	}
 }
-.menu-wrapper {	position: absolute; top: @header-height; width: 100%; padding-top: 40px; background: white; display: none; z-index: 5;
-	.menu {	background: @lightgray; width: 100%; height: 100%;padding: 20px;}
+.menu-wrapper {	position: absolute; top: @header-height; width: 100%;display: none; z-index: 5;
+	.menu {	background: @lightgray; width: 100%; height: 100%;padding: 20px;
+		@media @phone {	padding-top: 0;}
+	}
+	p a {.transition(all 0.2s ease); border-bottom: 2px solid @primary; color: @primary; cursor: pointer; text-decoration: none;
+		&:hover {	color: @hover; border-color: transparent}
+	}
 	a {	.link-fix;
-		.preview {	display: inline-block; width: 48%; vertical-align: top; 
+		.preview {	display: inline-block; width: 48%; vertical-align: middle; 
 			@media @phone {	display: block; width: 100%; margin: 25px 0;}
 		}
 		&:nth-child(2n) {
@@ -115,11 +142,12 @@ header { position: absolute; top: 0; width: 100%; z-index: 10; background: trans
 				@media @phone {	float: none;}
 			}
 		}
+		&:hover { color :@primary;}
 	}
 }	
 
 
-footer { background: @lightgray;
+footer { background: white; border-top: @border;
 	.utility {	.small-copy; .mid-cont; padding: 15px 0; position: relative; border-top: @border; 
 		span:last-child {	position: absolute; right: 0;}
 		a {	.link-fix;}
@@ -128,13 +156,14 @@ footer { background: @lightgray;
 		@media @phone {	display: block; width: 100%; margin: 20px 0; }
 	}
 	.row .table-cell {	padding: 10px 0;}
-	.container { padding: 75px 0; .mid-cont; display: table;
+	.container { padding: 75px 0 30px; .mid-cont; display: table;
+		@media @phone {	padding-top: 20px;}
 		.icon {	width: 75px; vertical-align: top;}
 		
 		
 		.icon img.sun{	width: 48px;}
 		.icon img {	max-width: 70px;}
-		.about {	.accent-copy; padding-left: 2%; padding-right: 2%; color: #3b4040;
+		.about {	font-size: 16px; padding-left: 2%; padding-right: 2%; color: #3b4040;
 			h1 {	color: @primary;}
 			@media @phone {	width: 100%;}
 		}
@@ -144,24 +173,33 @@ footer { background: @lightgray;
 		@media phone {	display: block;}
 		
 	}
+	.logo {	.link-fix; display: block;}
+	.preview {	background: @lightgray}
+}
+.cobblehill { padding: 40px 5%;
+	@media @phone {	padding: 0 5% 20px;}
+	img {	max-width: 150px; display: inline; vertical-align: middle;}
+	.about {	display: inline-block; vertical-align: middle; padding-left: 20px;}
 }
 
 .heading {	// border-top: @border; border-bottom: @border; padding: 35px 0; margin: 35px 0;
 	h1 {	margin-bottom: 10px; border: 0;}
 }
-.bio, .date {	.small-copy;}
+.bio, .date {	.new-font; font-size: 14px;}
 
 .hero-image { background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; width: 100%; position: relative; min-height: 600px;
 	&:before {	content: '';position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.3); z-index: 2;}
-	.content {	position: absolute; top :60%; left: 50%; .transform(translate(-50%, -60%)); width: 75%; text-align: center; color :white;z-index: 3;}
+	.content {	position: absolute; bottom: 0; left: 0; width: 100%; color :white;z-index: 3; padding: 50px;}
+	.table, .table-cell {
+		@media @phone {	display: block; width: 100%;text-align: center; margin: 20px 0;}
+	}
 }
 
-.ctas a {	color: white;  border-bottom: 2px solid white; text-decoration: none; .accent-copy; vertical-align: bottom;
-	&:hover {	border-bottom: 0;}
+.ctas a {	color: white;  border: 2px solid white; text-decoration: none; .new-font; font-size: 14px; vertical-align: bottom; padding: 10px 20px;
+	&:hover {	background-color: white; color: @primary;}
 }
 
-.post { .mid-cont; position: relative;
-	
+.post { .mid-cont; position: relative; margin-top: 50px;
 	.sidebar { width: 25%; margin: 35px 0; position: absolute; top: 0; left: 2.5%;
 		@media @tablet {	width: 90%; position: relative; top: auto; left: auto; margin: 35px auto;}
 	}
@@ -169,7 +207,7 @@ footer { background: @lightgray;
 		p {	width: 70%; margin-left: 30%; padding-right: 2.5%;
 			@media @tablet {	width: 90%; margin-left: auto; padding-right: 0;margin-right: auto;}
 		}
-		.full-image {
+		.full-image { margin: 50px auto;
 			.wp-caption {	width: 100% !important;}
 			img, .wp-caption-text {	display: inline-block; vertical-align: top; padding-left: 0; padding-right: 0; margin-left: 0;}
 			img {	width: 75%; padding-right: 3%;
@@ -185,9 +223,10 @@ footer { background: @lightgray;
 			}
 			@media @phone {	margin: 40px auto;}
 		}
-		.inline-images { display: table; width: 100%; text-align: left;
+		.inline-images { display: table; width: 100%; text-align: left; margin: 50px auto; table-layout: fixed;
+			img {	max-width: 100%;}
 			p {	display: none;}
-			.wp-caption {	display: table-cell; vertical-align: bottom; padding-left: 1%; 
+			.wp-caption {	display: table-cell; vertical-align: bottom; padding-left: 1%; width: 100% !important;
 				p {	display: block; width: 100%; margin-left: 0; padding-right: 0; padding-left: 0; }
 				&:first-of-type {	padding-right: 1%; padding-left: 0;}
 				@media @phone {	display: block; width: 100% !important; margin: 40px auto;}
@@ -225,5 +264,8 @@ footer { background: @lightgray;
 	}
 	.cont {	margin-right: 2%;}
 	.heading {	border-bottom: 0;}
+	&.about {	background: transparent; display: inline-block; width: 47%; margin: 0; padding: 0 30px; vertical-align: middle;
+		@media @phone {	display: block; width: 100%; padding: 30px;}
+	}
 
 }

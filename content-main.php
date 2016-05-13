@@ -6,17 +6,17 @@
  */
 ?>
 <div class="hero-image" style="background-image: url(<?php the_field('hero_image') ?>)">
-	<div class="content">
-		<div class="date"><?php the_date(); ?></div>
-		<div class="heading">
+	<div class="content table">
+		<div class="table-cell left">
 			<h1><?php the_title(); ?></h1>
 			<h2><?php the_field('titles'); ?></h2>
+		</div>
+		<div class="table-cell right">
 			<div class="ctas">
 				<a href="#watch">watch</a>
 				<a href="#read">read</a>
 			</div>
 		</div>
-		<div class="bio"><?php the_field('bio'); ?></div>
 	</div>
 </div>
 <div class="video-container" id="watch">

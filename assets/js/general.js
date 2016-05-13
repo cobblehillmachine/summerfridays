@@ -7,6 +7,8 @@ $( window ).load(function() {
 	$(".hamburger").on('click', function() {
 		$(".menu-wrapper").fadeToggle();
 		$('.body-wrapper').toggle();
+		$('body').toggleClass('gray');
+		$('header').toggleClass('open');
 	})
 	if ($(window).width() > 850) {
 		divEqualizer($('.question'))
